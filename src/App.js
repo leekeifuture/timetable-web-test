@@ -1,14 +1,26 @@
+import * as axios from 'axios'
 import React from 'react'
 import TelegramLoginButton from 'telegram-login-button'
 import styles from './App.module.css'
 
-function App() {
+const App = () => {
+    const signUpTelegramAccount = (telegramAccount) => {
+        axios.post('http://localhost:8080/api/v1/sign/up/telegram', {
+            id: telegramAccount.id,
+            firstName: telegramAccount.first_name,
+            username: telegramAccount.username,
+            photoUrl: telegramAccount.photo_url,
+            authDate: telegramAccount.auth_date,
+            hash: telegramAccount.hash
+        })
+    }
+
     return (
         <div className={styles.app}>
             <header className={styles.appHeader}>
                 <TelegramLoginButton
                     botName="ttschedule_bot"
-                    dataOnauth={user => console.log(user)}
+                    dataOnauth={telegramAccount => signUpTelegramAccount(telegramAccount)}
                     usePic
                 />
             </header>
