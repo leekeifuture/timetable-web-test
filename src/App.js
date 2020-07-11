@@ -12,6 +12,8 @@ const App = () => {
             photoUrl: telegramAccount.photo_url,
             authDate: telegramAccount.auth_date,
             hash: telegramAccount.hash
+        }, {withCredentials: true}).then(response => {
+            console.log(response)
         })
     }
 
